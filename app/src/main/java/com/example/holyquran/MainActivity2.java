@@ -6375,39 +6375,47 @@ public class MainActivity2 extends AppCompatActivity {
 
     ListView verseListView;
     EditText verseNumberEditText;
-    String[] selectedVerses;
+    ArrayAdapter<String> verseAdapter;
+    String[] arabicSurahText;
     int startVerse;
+    int endVerse;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-         verseListView = findViewById(R.id.verseListView);
-         verseNumberEditText = findViewById(R.id.verseNumberEditText);
+        verseListView = findViewById(R.id.verseListView);
+        verseNumberEditText = findViewById(R.id.verseNumberEditText);
+
+        // Get the Arabic surah text from your resources or external source
 
 
+        // Get the surah name and verse range from the intent
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String surahName = extras.getString("surat");
-             startVerse = extras.getInt("StartOfAyat");
-            int endVerse = extras.getInt("EndOfAyat");
+            startVerse = extras.getInt("StartOfAyat");
+            endVerse = extras.getInt("EndOfAyat");
 
             setTitle(surahName);
 
             // Create an array containing the selected surah verses
-             selectedVerses = new String[endVerse - startVerse];
+            String[] selectedVerses = new String[endVerse - startVerse];
             for (int i = startVerse; i < endVerse; i++) {
-                selectedVerses[i - startVerse] = QuranArabicText[i];
+                selectedVerses[i - startVerse] =QuranArabicText[i];
             }
 
-            ArrayAdapter<String> verseAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, selectedVerses);
+            verseAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, selectedVerses);
             verseListView.setAdapter(verseAdapter);
 
             verseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     String selectedVerse = selectedVerses[position];
-                    Toast.makeText(MainActivity2.this, selectedVerse, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
+                    intent.putExtra("selectedVerse", selectedVerse);
+                    startActivity(intent);
                 }
             });
         }
@@ -6418,18 +6426,17 @@ public class MainActivity2 extends AppCompatActivity {
                 String verseNumberString = verseNumberEditText.getText().toString().trim();
                 if (!verseNumberString.isEmpty()) {
                     int verseNumber = Integer.parseInt(verseNumberString);
-                    int verseIndex = verseNumber - startVerse;
 
-
-                    if (verseIndex >= 0 && verseIndex < selectedVerses.length) {
-                        verseListView.setSelection(verseIndex);
-                        verseListView.smoothScrollToPosition(verseIndex);
+                    if (verseNumber >= startVerse && verseNumber < endVerse) {
+                        String selectedVerse = QuranArabicText[verseNumber - 1];
+                        Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
+                        intent.putExtra("selectedVerse", selectedVerse);
+                        startActivity(intent);
                     } else {
-                        Toast.makeText(MainActivity2.this, "Verse not found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity2.this, "Invalid verse number", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
-
     }
 }
