@@ -6433,7 +6433,7 @@ public class MainActivity2 extends AppCompatActivity {
                         intent.putExtra("selectedVerse", selectedVerse);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(MainActivity2.this, "Invalid verse number", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity2.this, " Ayat number not valid", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
