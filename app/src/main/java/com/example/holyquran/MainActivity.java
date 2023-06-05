@@ -257,13 +257,28 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i=0;i<114;i++)
         {
-            array.add("Surah"+englishSurahNames[i]);
+            array.add("Surah "+englishSurahNames[i]);
         }
 
 
         ArrayAdapter<String>  adapter = new ArrayAdapter<String>(MainActivity.this , android.R.layout.simple_dropdown_item_1line, array);
 
         lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String a = array.get(position);
+
+
+                Intent intent = new Intent(MainActivity.this , MainActivity2.class);
+                //Toast.makeText(MainActivity.this, f, Toast.LENGTH_SHORT).show();
+                intent.putExtra("surat" , a);
+                intent.putExtra("StartOfAyat" , SSP[position]);
+                intent.putExtra("EndOfAyat" , (SSP[position + 1]  ) );
+                startActivity(intent);
+            }
+        });
 
 
 
