@@ -4,12 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:orientation="vertical"
-    android:background="#C8C8C8"
+    android:orientation="vertical"
+    android:background="#A0A0A0"
     tools:context=".MainActivity">
 
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:divider="#CCCCCC"
+        android:dividerHeight="1dp"
+        android:textColor="#FFFFFF" />
+
 </LinearLayout>

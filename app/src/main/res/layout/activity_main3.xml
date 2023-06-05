@@ -7,13 +7,21 @@
     android:paddingTop="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
-    android:background="#C8C8C8"
+    android:background="#A0A0A0"
     tools:context=".MainActivity3">
 
     <TextView
         android:id="@+id/verseT"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="373dp"
+        android:layout_height="578dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="124dp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
